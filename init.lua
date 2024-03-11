@@ -846,6 +846,12 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+  },
+  {
     'windwp/nvim-autopairs',
     -- Optional dependency
     dependencies = { 'hrsh7th/nvim-cmp' },
