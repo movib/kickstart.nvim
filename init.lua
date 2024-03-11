@@ -150,6 +150,10 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 999
 
+-- Configure tab display size
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -571,6 +575,9 @@ require('lazy').setup({
           },
         },
         solargraph = {},
+        tsserver = {},
+        prettier = {},
+        astro = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -797,7 +804,7 @@ require('lazy').setup({
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby', 'yaml' },
+        ensure_installed = { 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'ruby', 'yaml', 'astro' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
@@ -837,6 +844,21 @@ require('lazy').setup({
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'windwp/nvim-autopairs',
+    -- Optional dependency
+    dependencies = { 'hrsh7th/nvim-cmp' },
+    config = function()
+      local npairs = require 'nvim-autopairs'
+      npairs.setup {}
+      -- Add endwise for ruby
+      npairs.add_rules(require 'nvim-autopairs.rules.endwise-ruby')
+      -- If you want to automatically add `(` after selecting a function or method
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      local cmp = require 'cmp'
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    end,
   },
   { 'vinnymeller/swagger-preview.nvim', opts = {} },
 }, {
