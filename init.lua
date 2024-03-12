@@ -723,7 +723,14 @@ require('lazy').setup({
       }
     end,
   },
-
+  {
+    -- Add indentation guides even on blank lines
+    'lukas-reineke/indent-blankline.nvim',
+    -- Enable `lukas-reineke/indent-blankline.nvim`
+    -- See `:help ibl`
+    main = 'ibl',
+    opts = {},
+  },
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is
@@ -857,7 +864,9 @@ require('lazy').setup({
     dependencies = { 'hrsh7th/nvim-cmp' },
     config = function()
       local npairs = require 'nvim-autopairs'
-      npairs.setup {}
+      npairs.setup {
+        disable_filetype = { 'TelescopePrompt', 'spectre_panel', 'harpoon' },
+      }
       -- Add endwise for ruby
       npairs.add_rules(require 'nvim-autopairs.rules.endwise-ruby')
       -- If you want to automatically add `(` after selecting a function or method
