@@ -537,7 +537,6 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -574,6 +573,7 @@ require('lazy').setup({
             },
           },
         },
+        pyright = {},
         solargraph = {},
         tsserver = {},
         prettier = {},
@@ -621,8 +621,8 @@ require('lazy').setup({
       },
       formatters_by_ft = {
         lua = { 'stylua' },
+        python = { 'isort', 'black' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
@@ -770,6 +770,9 @@ require('lazy').setup({
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
+
+      -- Enable indent scope for ruby
+      require('mini.indentscope').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
