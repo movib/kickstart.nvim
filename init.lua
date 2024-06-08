@@ -856,6 +856,16 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
+    'ThePrimeagen/refactoring.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('refactoring').setup()
+    end,
+  },
+  {
     'windwp/nvim-ts-autotag',
     config = function()
       require('nvim-ts-autotag').setup()
@@ -950,6 +960,20 @@ end
 vim.keymap.set('n', '<C-S-E>', function()
   toggle_telescope(harpoon:list())
 end, { desc = 'Open harpoon window' })
+
+-- [[ Configure Refactoring]]
+-- Keymaps
+vim.keymap.set('x', '<leader>re', ':Refactor extract ')
+vim.keymap.set('x', '<leader>rf', ':Refactor extract_to_file ')
+
+vim.keymap.set('x', '<leader>rv', ':Refactor extract_var ')
+
+vim.keymap.set({ 'n', 'x' }, '<leader>ri', ':Refactor inline_var')
+
+vim.keymap.set('n', '<leader>rI', ':Refactor inline_func')
+
+vim.keymap.set('n', '<leader>rb', ':Refactor extract_block')
+vim.keymap.set('n', '<leader>rbf', ':Refactor extract_block_to_file')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
