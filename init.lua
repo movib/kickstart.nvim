@@ -536,7 +536,6 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -578,6 +577,7 @@ require('lazy').setup({
         tsserver = {},
         prettier = {},
         astro = {},
+        gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -622,6 +622,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
+        go = { 'goimports', 'gofmt' },
         -- Conform can also run multiple formatters sequentially
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
