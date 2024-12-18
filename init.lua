@@ -631,7 +631,23 @@ require('lazy').setup({
       },
     },
   },
+  { -- Linting
+    'mfussenegger/nvim-lint',
+    config = function() -- This is the function that runs, AFTER loading
+      require('lint').linters_by_ft = {
+        python = { 'pflake8', 'mypy' },
+      }
 
+      vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+        callback = function()
+          -- try_lint without arguments runs the linters defined in `linters_by_ft`
+          -- for the current filetype
+          require('lint').try_lint()
+          require('lint').try_lint 'mypy'
+        end,
+      })
+    end,
+  },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -888,6 +904,15 @@ require('lazy').setup({
       local cmp = require 'cmp'
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
+  },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   },
   { 'vinnymeller/swagger-preview.nvim', opts = {} },
 }, {
