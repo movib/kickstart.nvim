@@ -914,7 +914,9 @@ require('lazy').setup({
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   },
-  { 'vinnymeller/swagger-preview.nvim', opts = {} },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
 }, {
   ui = {
     -- If you have a Nerd Font, set icons to an empty table which will use the
